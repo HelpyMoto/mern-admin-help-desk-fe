@@ -12,11 +12,13 @@
   }
   ```
 */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
+import { useLocation } from 'react-router-dom'
+import styles from './ticket.module.css';
 
 
 function classNames(...classes) {
@@ -24,7 +26,29 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-    const [agreed, setAgreed] = useState(false)
+    const [agreed, setAgreed] = useState(false);
+
+    // TEMPORARY CODE for fetching ticketStatus.
+    // location.state contains the user data and token.
+    const location = useLocation();
+    const [tickets, setTickets] = useState(null);
+
+    useEffect(() => {
+        fetch("https://service-provider-apis.onrender.com/api/v1/admin/allticket/cleaner", {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTdiZDA4YTk0MDg2NjczYmNmMDVlMSIsImlhdCI6MTY4NTAwNzM1NSwiZXhwIjoyNTQ5MDA3MzU1fQ.URXzJj7tNkt4vkXbETcpyIo1OmhJjsIidk219LV31YU"
+            }
+        }
+        ).then(response => response.json()) 
+        .then(response => {
+            console.log(response);
+            if(response.success === true)
+                setTickets(response.ticket);
+        });
+        
+    }, []);
 
     return (
         <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -89,7 +113,30 @@ export default function Example() {
                         Check Status
                     </button>
                 </div>
+                {/* <div>
+                    {tickets?.map(ticket => <div>status: {ticket.status}</div>)}
+                </div> */}
+                {tickets?.map(ticket => {
+                    if(ticket.status === 'pending')
+                        return <TicketDetails status={ticket.status} modeOfService={ticket.modeOfService} paymentMode={ticket.paymentMode} paymentStatus={ticket.paymentStatus}   />
+                })}
             </form>
         </div>
+    )
+}
+
+function TicketDetails({status, modeOfService, paymentMode, paymentStatus}) {
+    
+
+
+    return(
+        <>
+        <div className={styles.card}>
+            <div><b>status: </b>{status}</div>
+            <div><b>mode of service: </b>{modeOfService}</div>
+            <div><b>paymentMode: </b>{paymentMode}</div>
+            <div><b>payment status: </b>{paymentStatus}</div>
+        </div>
+        </>
     )
 }
