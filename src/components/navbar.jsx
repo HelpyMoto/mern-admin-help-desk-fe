@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/authContext";
+import Cookies from "js-cookie";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(
+    !!Cookies.get("adminToken") || !!Cookies.get("managerToken")
+  );
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    logout();
+  };
 
   return (
     <div className="">
-      <nav className="bg-blue-500 shadow">
+      <nav className="bg-blue-500 shadow rounded-b-xl">
         <div className="w-full justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <a href="/">
+              <a href="/dashboard">
                 <h2 className="text-2xl font-bold text-white">HELPY MOTO</h2>
               </a>
               <div className="md:hidden">
@@ -58,10 +69,10 @@ export default function NavBar() {
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/">Dashboard</a>
+                  <a href="/dashboard">Dashboard</a>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/enterTicket">Submit Ticket</a>
+                  <a href="/submitTicket">Submit Ticket</a>
                 </li>
                 <li className="text-white hover:text-indigo-200">
                   <a href="/myTickets">My Ticket</a>
@@ -70,35 +81,41 @@ export default function NavBar() {
 
               {navbar && (
                 <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                  <a
-                    href="/login"
-                    className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
-                  >
-                    Log in
-                  </a>
-                  <a
-                    href="/signup"
-                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
-                  >
-                    Sign up
-                  </a>
+                  {loggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
+                    >
+                      Log out
+                    </button>
+                  ) : (
+                    <a
+                      href="/"
+                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
+                    >
+                      Log in
+                    </a>
+                  )}
                 </div>
               )}
             </div>
           </div>
           <div className="hidden space-x-2 md:inline-block">
-            <a
-              href="/login"
-              className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
-            >
-              Log in
-            </a>
-            <a
-              href="/signup"
-              className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
-            >
-              Sign up
-            </a>
+            {loggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-blue-500"
+              >
+                Log out
+              </button>
+            ) : (
+              <a
+                href="/"
+                className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-blue-500"
+              >
+                Log in
+              </a>
+            )}
           </div>
         </div>
       </nav>

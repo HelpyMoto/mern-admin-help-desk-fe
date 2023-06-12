@@ -5,7 +5,7 @@ const cardData = [
     heading: "Submit Ticket",
     data: "Submit Ticket",
     buttonName: "Submit Ticket",
-    link: "/enterTicket",
+    link: "/submitTicket",
   },
   {
     heading: "My Tickets",
@@ -24,10 +24,10 @@ const cardData = [
 export default function CardSection() {
   return (
     <div>
-      <div className="grid grid-cols-3 gap-5 mt-10 border p-5 w-100">
+      <div className="grid md:grid-cols-3 gap-5 mt-10 border p-5 w-full">
         {cardData.map((card, index) => {
           return (
-            <div key={index} className="grid-row-1">
+            <div key={index}>
               <Card heading={card.heading} data={card.data} buttonName={card.buttonName} link={card.link} />
             </div>
           );

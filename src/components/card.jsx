@@ -5,7 +5,7 @@ export default function Card(props) {
   const navigate = useNavigate();
   const handleClick = () => navigate(props.link);
   return (
-    <div className="card bg-white rounded-lg shadow-md h-60">
+    <div className="card bg-white rounded-lg shadow-md h-60 text-center">
       <div className="p-4">
         <h2 className="text-xl font-medium">{props.heading}</h2>
         <p className="mt-2 text-gray-600">{props.data}</p>

@@ -2,7 +2,7 @@ import React from "react";
 
 const sideNav = () => {
   return (
-    <div className="bg-white w-64 flex-shrink-0">
+    <div className="bg-white w-64 flex-shrink-0 hidden md:block">
       <nav className="mt-10 border">
         <ul>
           <li>
@@ -26,8 +26,8 @@ const sideNav = () => {
           </li>
           <li>
             <a
-              href="/"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              href="/dashboard"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,8 +48,8 @@ const sideNav = () => {
           </li>
           <li>
             <a
-              href="/enterTicket"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              href="/submitTicket"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const sideNav = () => {
           <li>
             <a
               href="/myTickets"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ const sideNav = () => {
           <li>
             <a
               href="/ticketStatus"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ const sideNav = () => {
           <li>
             <a
               href="/userData"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@ const sideNav = () => {
           <li>
             <a
               href="/login"
-              className="text-black hover:text-blue-500 py-4 px-4 block border space-x-6 flex"
+              className="text-black hover:text-blue-500 py-4 px-4 border space-x-6 flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
