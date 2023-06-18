@@ -6,6 +6,9 @@ import Login from "./pages/login";
 import Cleaner from  "./pages/cleaner";
 import Mechanic from "./pages/mechanic";
 import Driver from "./pages/driver";
+import ManageAdminUser from "./pages/manage-admin-user";
+
+
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
         <Route path="/cleaner" element={<Cleaner />} />
         <Route path="/mechanic" element={<Mechanic />} />
         <Route path="/driver" element={<Driver />} />
+        <Route path="/manageAdminUser" element={<ManageAdminUser />} />
 
       </Routes>
     </BrowserRouter>
