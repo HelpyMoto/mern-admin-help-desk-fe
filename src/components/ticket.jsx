@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
-function ProgressCircle({ progress, status, color="white" }) {
+function ProgressCircle({ progress, status, color }) {
   const [offset, setOffset] = useState("0");
   const circleRef = useRef(null);
   const radius = 32;
@@ -32,7 +32,7 @@ function ProgressCircle({ progress, status, color="white" }) {
         />
         <circle
           ref={circleRef}
-          className={`stroke-current text-${color}`}
+          className={`stroke-current ${color}`}
           cx="45"
           cy="45"
           r={radius}
@@ -43,10 +43,10 @@ function ProgressCircle({ progress, status, color="white" }) {
         />
       </svg>
       <div
-        className={`static left-10 h-full flex flex-col items-center justify-center text-${color} font-bold`}
+        className={`static left-10 h-full flex flex-col items-center justify-center ${color} font-bold`}
       >
-        <div className={`text-l text-${color}`}>{progress}%</div>
-        <div className={`text-m font-bold text-${color}`}>{status}</div>
+        <div className={`text-l ${color}`}>{progress}%</div>
+        <div className={`text-m font-bold ${color}`}>{status}</div>
       </div>
     </div>
   );

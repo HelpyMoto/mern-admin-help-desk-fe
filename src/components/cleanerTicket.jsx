@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const styles = {
   uploadImage: {
@@ -12,6 +12,18 @@ export default function CleanerTicket() {
   const [right, setRight] = useState(null);
   const [back, setBack] = useState(null);
   const [engine, setEngine] = useState(null);
+  const width = "300px";
+
+  useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
 
   function handleChange(event) {
     console.log(event.target.name);
@@ -296,8 +308,7 @@ export default function CleanerTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     front === null
@@ -328,8 +339,7 @@ export default function CleanerTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     left === null
@@ -359,8 +369,7 @@ export default function CleanerTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     right === null
@@ -390,8 +399,7 @@ export default function CleanerTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     back === null
@@ -421,8 +429,7 @@ export default function CleanerTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     engine === null

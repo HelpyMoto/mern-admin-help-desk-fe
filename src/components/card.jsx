@@ -9,7 +9,7 @@ export default function Card(props) {
       <div className="p-4">
         <h2 className="text-xl font-medium">{props.heading}</h2>
         <p className="mt-2 text-gray-600">{props.data}</p>
-        <button className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-md" onClick={handleClick}>
+        <button className="mt-5 px-4 py-2 bg-teal-500 text-white rounded-md" onClick={handleClick}>
           {props.buttonName}
         </button>
       </div>

@@ -1,46 +1,98 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const styles = {
-  uploadImage: {
-    display: "none",
-  },
-};
+// const styles = {
+//   uploadImage: {
+//     display: "none",
+//   },
+// };
 
 export default function MechanicTicket() {
-  const [front, setFront] = useState(null);
-  const [left, setLeft] = useState(null);
-  const [right, setRight] = useState(null);
-  const [back, setBack] = useState(null);
-  const [engine, setEngine] = useState(null);
+  // const [front, setFront] = useState(null);
+  // const [left, setLeft] = useState(null);
+  // const [right, setRight] = useState(null);
+  // const [back, setBack] = useState(null);
+  // const [engine, setEngine] = useState(null);
+  const [formData, setFormData] = useState({
+    customerId: "",
+    mechanicId: "",
+    scheduleOfService: "",
+    typesOfServices: "",
+    otherServiceTypeText: "",
+    modeOfService: "",
+    query: "",
+    description: "",
+    status: "",
+    currentLocation: {
+      latitude: "",
+      longitude: "",
+    },
+    trackingLocation: {
+      latitude: "",
+      longitude: "",
+    },
+    distance: "",
+    totalPrice: "",
+    paymentMode: "",
+    paymentStatus: "",
+    onTimeOTP: "",
+    isVerifiedOnTimeOTP: "",
+    scheduledArrivedOTP: "",
+    isVerifiedscheduledArrivedOTP: "",
+    scheduledWorkshopOTP: "",
+    isVerifiedscheduledWorkshopOTP: "",
+    scheduledDeliveredOTP: "",
+    isVerifiedscheduledDeliveredOTP: "",
+    pickupPlace: "",
+    pickupDate: "",
+    pickupTime: "",
+    dropPlace: "",
+    dropDate: "",
+    dropTime: "",
+  });
+  // const width = "300px";
 
-  function handleChange(event) {
-    console.log(event.target.name);
-    const name = event.target.name;
+  // useEffect(() => {
+  //   const unloadCallback = (event) => {
+  //     event.preventDefault();
+  //     event.returnValue = "";
+  //     return "";
+  //   };
 
-    const image = URL.createObjectURL(event.target.files[0]);
-    switch (name) {
-      case "front":
-        setFront(image);
-        break;
+  //   window.addEventListener("beforeunload", unloadCallback);
+  //   return () => window.removeEventListener("beforeunload", unloadCallback);
+  // }, []);
 
-      case "left":
-        setLeft(image);
-        break;
+  // function handleChange(event) {
+  //   console.log(event.target.name);
+  //   const name = event.target.name;
 
-      case "right":
-        setRight(image);
-        break;
+  //   const image = URL.createObjectURL(event.target.files[0]);
+  //   switch (name) {
+  //     case "front":
+  //       setFront(image);
+  //       break;
 
-      case "back":
-        setBack(image);
-        break;
+  //     case "left":
+  //       setLeft(image);
+  //       break;
 
-      case "engine":
-        setEngine(image);
-        break;
-    }
+  //     case "right":
+  //       setRight(image);
+  //       break;
+
+  //     case "back":
+  //       setBack(image);
+  //       break;
+
+  //     case "engine":
+  //       setEngine(image);
+  //       break;
+  //   }
+  // }
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-
   return (
     <div className="px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
@@ -64,8 +116,9 @@ export default function MechanicTicket() {
               <input
                 type="text"
                 name="ID"
-                id="ID"
-                autoComplete="given-name"
+                id="customerId"
+                value={formData.customerId}
+                onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -82,8 +135,9 @@ export default function MechanicTicket() {
                 type="text"
                 name="mechanic_ID"
                 id="mechanic_ID"
-                autoComplete="given-name"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                value={formData.mechanicId}
+                onChange={handleChange}
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -99,6 +153,8 @@ export default function MechanicTicket() {
               list="scheduleOfServices"
               name="scheduleOfService"
               id="scheduleOfService"
+              value={formData.scheduleOfService}
+              onChange={handleChange}
               placeholder="Current"
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -119,6 +175,8 @@ export default function MechanicTicket() {
               list="typesOfServices"
               name="typesOfService"
               id="typesOfService"
+              value={formData.typesOfServices}
+              onChange={handleChange}
               placeholder=" Brakedown"
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-neutral-950 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -140,6 +198,8 @@ export default function MechanicTicket() {
               list="modeOfServices"
               name="modeOfService"
               id="modeOfService"
+              value={formData.modeOfService}
+              onChange={handleChange}
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-neutral-950 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             <datalist id="modeOfServices">
@@ -161,6 +221,8 @@ export default function MechanicTicket() {
               list="ticketStatuses"
               name="ticketStatus"
               id="ticketStatus"
+              value={formData.status}
+              onChange={handleChange}
               placeholder="notAccepted"
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -186,7 +248,8 @@ export default function MechanicTicket() {
                 type="text"
                 name="query"
                 id="query"
-                autoComplete="organization"
+                value={formData.query}
+                onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -203,9 +266,10 @@ export default function MechanicTicket() {
               <textarea
                 name="message"
                 id="message"
+                value={formData.description}
+                onChange={handleChange}
                 rows={8}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={""}
               />
             </div>
           </div>
@@ -222,7 +286,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="currentLocation"
                   id="currentLocation"
-                  autoComplete="address-level2"
+                  value={formData.currentLocation}
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -240,7 +305,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="trackingLocation"
                   id="trackingLocation"
-                  autoComplete="address-level1"
+                  value={formData.trackingLocation}
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -258,6 +324,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="distance"
                   id="distance"
+                  value={formData.distance}
+                  onChange={handleChange}
                   autoComplete="distance"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -275,6 +343,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="totalPrice"
                   id="totalPrice"
+                  value={formData.totalPrice}
+                  onChange={handleChange}
                   autoComplete="distance"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -282,7 +352,7 @@ export default function MechanicTicket() {
             </div>
           </div>
 
-          <p className="block text-sm font-medium leading-6 text-gray-900">
+          {/* <p className="block text-sm font-medium leading-6 text-gray-900">
             Upload Image
           </p>
 
@@ -297,8 +367,7 @@ export default function MechanicTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     front === null
@@ -329,8 +398,7 @@ export default function MechanicTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     left === null
@@ -346,7 +414,7 @@ export default function MechanicTicket() {
                   type="file"
                   name="left"
                   id="left"
-                    hidden
+                  hidden
                 />
               </div>
             </div>
@@ -360,8 +428,7 @@ export default function MechanicTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     right === null
@@ -377,7 +444,7 @@ export default function MechanicTicket() {
                   type="file"
                   name="right"
                   id="right"
-                    hidden
+                  hidden
                 />
               </div>
             </div>
@@ -391,8 +458,7 @@ export default function MechanicTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     back === null
@@ -408,7 +474,7 @@ export default function MechanicTicket() {
                   type="file"
                   name="back"
                   id="back"
-                    hidden
+                  hidden
                 />
               </div>
             </div>
@@ -422,8 +488,7 @@ export default function MechanicTicket() {
                 className="inline text-sm font-semibold leading-6 text-gray-900"
               >
                 <img
-                  width="120px"
-                  height="120px"
+                  width={front === null ? width : "350px"}
                   className="rounded-3xl inline hover:cursor-pointer hover:bg-green-200"
                   src={
                     engine === null
@@ -439,11 +504,11 @@ export default function MechanicTicket() {
                   type="file"
                   name="engine"
                   id="engine"
-                    hidden
+                  hidden
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-3 sm:col-span-2 gap-4">
             <div className="sm:col-span-1 sm:col-start-1">
@@ -458,6 +523,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="pickupPlace"
                   id="pickupPlace"
+                  value={formData.pickupPlace}
+                  onChange={handleChange}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -476,6 +543,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="pickupDate"
                   id="pickupDate"
+                  value={formData.pickupDate}
+                  onChange={handleChange}
                   autoComplete="address-level1"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -494,6 +563,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="pickupTime"
                   id="pickupTime"
+                  value={formData.pickupTime}
+                  onChange={handleChange}
                   autoComplete="distance"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -514,6 +585,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="dropPlace"
                   id="dropPlace"
+                  value={formData.dropPlace}
+                  onChange={handleChange}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -532,6 +605,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="dropDate"
                   id="dropDate"
+                  value={formData.dropDate}
+                  onChange={handleChange}
                   autoComplete="address-level1"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -550,6 +625,8 @@ export default function MechanicTicket() {
                   type="text"
                   name="dropTime"
                   id="dropTime"
+                  value={formData.dropTime}
+                  onChange={handleChange}
                   autoComplete="distance"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -569,6 +646,8 @@ export default function MechanicTicket() {
               list="paymentModes"
               name="paymentMode"
               id="paymentMode"
+              value={formData.paymentMode}
+              onChange={handleChange}
               placeholder="Card"
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-neutral-950 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -586,12 +665,14 @@ export default function MechanicTicket() {
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               {" "}
-              Pending Status
+              Payment Status
             </label>
             <input
               list="pendingStatuses"
               name="pendingStatus"
               id="pendingStatus"
+              value={formData.paymentStatus}
+              onChange={handleChange}
               placeholder="Pending"
               className="block w-full rounded-md border-0 px-3.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />

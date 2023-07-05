@@ -13,22 +13,21 @@ const cardData = [
     buttonName: "My Tickets",
     link: "/myTickets",
   },
-  {
-    heading: "Ticket Status",
-    data: "View the Status of all Tickets",
-    buttonName: "Ticket Status",
-    link: "/ticketStatus",
-  },
 ];
 
 export default function CardSection() {
   return (
     <div>
-      <div className="grid md:grid-cols-3 gap-5 mt-10 border p-5 w-full">
+      <div className="grid md:grid-cols-2 gap-5 mt-10 border p-5 w-full">
         {cardData.map((card, index) => {
           return (
             <div key={index}>
-              <Card heading={card.heading} data={card.data} buttonName={card.buttonName} link={card.link} />
+              <Card
+                heading={card.heading}
+                data={card.data}
+                buttonName={card.buttonName}
+                link={card.link}
+              />
             </div>
           );
         })}

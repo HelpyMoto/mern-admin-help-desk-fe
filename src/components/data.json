@@ -38,20 +38,20 @@
   },
 
   "User": {
-    "_id": "6457b7c577e7ebd685afc0da",
-    "userUid": 100099,
-    "firstName": "Yash",
-    "lastName": "Darshankar",
-    "fullName": "Yash Darshankar",
-    "email": "yash@yash.in",
-    "phoneNo": "+91323223233",
-    "vehicleId": [],
-    "role": "user",
     "accountDisable": false,
+    "createdAt": "2023-06-10T10:38:44.195Z",
     "currentLocation": [],
-    "createdAt": "2023-05-07T14:37:57.290Z",
-    "updatedAt": "2023-05-07T14:37:57.290Z",
-    "__v": 0
+    "email": "karandua2002@gmail.com",
+    "firstName": "karan",
+    "fullName": "karan dua",
+    "lastName": "dua",
+    "photo": "https://lh3.googleusercontent.com/a/AAcHTtcUseypLY8I6wccH4ba1A2hHoSiFV22vVuN1-rrrA=s96-c",
+    "role": "user",
+    "updatedAt": "2023-06-10T10:38:44.195Z",
+    "userUid": 100118,
+    "vehicleId": [],
+    "__v": 0,
+    "_id": "648452b47fb9c69f5f9d1606"
   },
 
   "mechanic": {

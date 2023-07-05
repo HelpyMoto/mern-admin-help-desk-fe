@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import MyTicket from "./pages/myTickets";
 import SubmitTicket from "./pages/submitTicket";
-import TicketStatus from "./pages/ticketStatus";
 import UserData from "./pages/userData";
 import Error from "./pages/error";
 import Login from "./pages/login";
@@ -11,6 +10,8 @@ import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./context/protectedRoutes";
 import CreateAdminUser from "./pages/signup";
 import ManageAdminUser from "./pages/manage-admin-ser";
+import AddNewUser from "./pages/add-new-user";
+import ManageData from "./pages/manage-data";
 
 function App() {
   return (
@@ -19,15 +20,43 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route
+            path="/manageData"
+            element={
+              <ProtectedRoute
+                component={ManageData}
+                adminOnly={false}
+                managerOnly={true}
+              />
+            }
+          />
+          <Route
+            path="/addNewUser"
+            element={
+              <ProtectedRoute
+                component={AddNewUser}
+                adminOnly={true}
+                managerOnly={true}
+              />
+            }
+          />
+          <Route
             path="/createAdminUser"
             element={
-              <ProtectedRoute component={CreateAdminUser} adminOnly={true} managerOnly={false} />
+              <ProtectedRoute
+                component={CreateAdminUser}
+                adminOnly={true}
+                managerOnly={false}
+              />
             }
           />
           <Route
             path="/manageAdminUser"
             element={
-              <ProtectedRoute component={ManageAdminUser} adminOnly={true} managerOnly={false} />
+              <ProtectedRoute
+                component={ManageAdminUser}
+                adminOnly={true}
+                managerOnly={false}
+              />
             }
           />
           <Route
@@ -45,16 +74,6 @@ function App() {
             element={
               <ProtectedRoute
                 component={SubmitTicket}
-                adminOnly={true}
-                managerOnly={true}
-              />
-            }
-          />
-          <Route
-            path="/ticketStatus"
-            element={
-              <ProtectedRoute
-                component={TicketStatus}
                 adminOnly={true}
                 managerOnly={true}
               />

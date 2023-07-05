@@ -33,7 +33,7 @@ export default function SubmitTicket() {
           id="ticketType"
           value={selectedTicketType}
           onChange={handleTicketTypeChange}
-          className="block border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-md shadow-sm py-2 mx-auto"
+          className="block border-gray-300 focus:ring-teal-500 focus:border-teal-500 rounded-md shadow-sm py-2 mx-auto"
         >
           <option value="">Select</option>
           <option value="cleaner">Cleaner</option>

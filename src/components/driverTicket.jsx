@@ -1,49 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const styles = {
-  uploadImage: {
-    display: "none",
-  },
-};
+// const styles = {
+//   uploadImage: {
+//     display: "none",
+//   },
+// };
 
 export default function DriverTicket() {
-  const [front, setFront] = useState(null);
-  const [left, setLeft] = useState(null);
-  const [right, setRight] = useState(null);
-  const [back, setBack] = useState(null);
-  const [engine, setEngine] = useState(null);
+  // const [front, setFront] = useState(null);
+  // const [left, setLeft] = useState(null);
+  // const [right, setRight] = useState(null);
+  // const [back, setBack] = useState(null);
+  // const [engine, setEngine] = useState(null);
 
-  function handleChange(event) {
-    console.log(event.target.name);
-    const name = event.target.name;
+  // function handleChange(event) {
+  //   console.log(event.target.name);
+  //   const name = event.target.name;
 
-    const image = URL.createObjectURL(event.target.files[0]);
-    switch (name) {
-      case "front":
-        setFront(image);
-        break;
+  //   const image = URL.createObjectURL(event.target.files[0]);
+  //   switch (name) {
+  //     case "front":
+  //       setFront(image);
+  //       break;
 
-      case "left":
-        setLeft(image);
-        break;
+  //     case "left":
+  //       setLeft(image);
+  //       break;
 
-      case "right":
-        setRight(image);
-        break;
+  //     case "right":
+  //       setRight(image);
+  //       break;
 
-      case "back":
-        setBack(image);
-        break;
+  //     case "back":
+  //       setBack(image);
+  //       break;
 
-      case "engine":
-        setEngine(image);
-        break;
-    }
-  }
+  //     case "engine":
+  //       setEngine(image);
+  //       break;
+  //   }
+  // }
+
+  useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
 
   return (
     <div className="px-6 py-24 sm:py-32 lg:px-8">
-     
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Driver Ticket

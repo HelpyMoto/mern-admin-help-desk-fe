@@ -9,6 +9,22 @@ export default function NavBar() {
   );
   const { logout } = useContext(AuthContext);
 
+  let fullName = "";
+  const adminData = Cookies.get("adminData");
+  const managerData = Cookies.get("managerData");
+  try {
+    const parsedAdminData = adminData ? JSON.parse(adminData) : null;
+    const parsedManagerData = managerData ? JSON.parse(managerData) : null;
+    if (parsedAdminData && parsedAdminData.fullName) {
+      fullName = parsedAdminData.fullName;
+    } else if (parsedManagerData && parsedManagerData.fullName) {
+      fullName = parsedManagerData.fullName;
+    }
+  } catch (error) {
+    console.error("Error parsing JSON data from cookies:", error);
+    // Handle the error gracefully, e.g., show an error message to the user
+  }
+
   const handleLogout = () => {
     setLoggedIn(false);
     logout();
@@ -16,7 +32,7 @@ export default function NavBar() {
 
   return (
     <div className="">
-      <nav className="bg-blue-500 shadow rounded-b-xl">
+      <nav className="bg-teal-500 shadow rounded-b-xl">
         <div className="w-full justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -84,14 +100,14 @@ export default function NavBar() {
                   {loggedIn ? (
                     <button
                       onClick={handleLogout}
-                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
+                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-teal-500 hover:text-white"
                     >
                       Log out
                     </button>
                   ) : (
                     <a
                       href="/"
-                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-blue-500 hover:text-white"
+                      className="inline-block w-full px-4 py-2 text-center text-black bg-white rounded-md shadow hover:bg-teal-500 hover:text-white"
                     >
                       Log in
                     </a>
@@ -102,16 +118,19 @@ export default function NavBar() {
           </div>
           <div className="hidden space-x-2 md:inline-block">
             {loggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-blue-500"
-              >
-                Log out
-              </button>
+              <>
+                <span className="text-white m-2">{fullName}</span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-teal-500"
+                >
+                  Log out
+                </button>
+              </>
             ) : (
               <a
                 href="/"
-                className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-blue-500"
+                className="px-4 py-2 text-black bg-white rounded-md shadow hover:bg-white hover:text-teal-500"
               >
                 Log in
               </a>

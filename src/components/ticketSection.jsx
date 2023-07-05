@@ -79,7 +79,13 @@ export default function TicketSection() {
     // console.log(typeof(searchData));
     const searchedData = [];
     tickets.filter((ticket) => {
-      if (ticket._id.includes(search)) {
+      // console.log(ticket.customerId.email);
+      if (
+        ticket._id.includes(search) ||
+        (ticket.customerId &&
+          ticket.customerId.email &&
+          ticket.customerId.email.includes(search))
+      ) {
         searchedData.push(ticket);
         setSearchedTickets(searchedData);
       }
@@ -88,6 +94,9 @@ export default function TicketSection() {
   };
 
   const handleExport = () => {
+    if (searchedTicket.length === 0) {
+      return;
+    }
     const transposedData = transposeData(searchedTicket);
 
     const workbook = XLSX.utils.book_new();
@@ -299,34 +308,34 @@ export default function TicketSection() {
       <div className="m-5 p-2 border grid grid-rows-3">
         <div className="grid grid-rows-1 grid-cols-5 space-x-5 space-y-5 border mx-3 my-5 px-3 py-5">
           <h1 className="col-span-5 text-left text-2xl font-bold px-5">
-            Cleaner Tickets:
+            Cleaner Tickets: {cleanerTickets.length}
           </h1>
           {cleanerTickets.length > 0 && (
             <>
               <Ticket
                 status="Pending"
                 progress={percentPendingCleaner}
-                color={"#0ff"}
+                color={"text-red-500"}
               />
               <Ticket
                 status="Accepted"
                 progress={percentAcceptedCleaner}
-                color={"#000"}
+                color={"text-green-500"}
               />
               <Ticket
                 status="Rejected"
                 progress={percentRejectedCleaner}
-                color={"#000"}
+                color={"text-yellow-500"}
               />
               <Ticket
                 status="Completed"
                 progress={percentCompletedCleaner}
-                color={"#000"}
+                color={"text-blue-500"}
               />
               <Ticket
                 status="In Process"
                 progress={percentInProcessCleaner}
-                color={"#000"}
+                color={"text-orange-500"}
               />
             </>
           )}
@@ -338,34 +347,34 @@ export default function TicketSection() {
         </div>
         <div className="grid grid-rows-1 grid-cols-5 space-x-5 space-y-5 border mx-3 my-5 px-3 py-5">
           <h1 className="col-span-5 text-left text-2xl font-bold px-5">
-            Driver Tickets:
+            Driver Tickets: {driverTickets.length}
           </h1>
           {driverTickets.length > 0 && (
             <>
               <Ticket
                 status="Pending"
                 progress={percentPendingDriver}
-                color={"#000"}
+                color={"text-red-500"}
               />
               <Ticket
                 status="Accepted"
                 progress={percentAcceptedDriver}
-                color={"#000"}
+                color={"text-green-500"}
               />
               <Ticket
                 status="Rejected"
                 progress={percentRejectedDriver}
-                color={"#000"}
+                color={"text-yellow-500"}
               />
               <Ticket
                 status="Completed"
                 progress={percentCompletedDriver}
-                color={"#000"}
+                color={"text-blue-500"}
               />
               <Ticket
                 status="In Process"
                 progress={percentInProcessDriver}
-                color={"#000"}
+                color={"text-orange-500"}
               />
             </>
           )}
@@ -377,34 +386,34 @@ export default function TicketSection() {
         </div>
         <div className="grid grid-rows-1 grid-cols-5 space-x-5 space-y-5 border mx-3 my-5 px-3 py-5">
           <h1 className="col-span-5 text-left text-2xl font-bold px-5">
-            Mechanic Tickets:
+            Mechanic Tickets: {mechanicTickets.length}
           </h1>
           {mechanicTickets.length > 0 && (
             <>
               <Ticket
                 status="Pending"
                 progress={percentPendingMechanic}
-                color={"red"}
+                color={"text-red-500"}
               />
               <Ticket
                 status="Accepted"
                 progress={percentAcceptedMechanic}
-                color={"#000"}
+                color={"text-green-500"}
               />
               <Ticket
                 status="Rejected"
                 progress={percentRejectedMechanic}
-                color={"#000"}
+                color={"text-yellow-500"}
               />
               <Ticket
                 status="Completed"
                 progress={percentCompletedMechanic}
-                color={"#000"}
+                color={"text-blue-500"}
               />
               <Ticket
                 status="In Process"
                 progress={percentInProcessMechanic}
-                color={"#000"}
+                color={"text-orange-500"}
               />
             </>
           )}
@@ -415,55 +424,59 @@ export default function TicketSection() {
           )}
         </div>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 bg-gray-300 border m-5 p-2 space-y-2 space-x-2">
+      <div className="grid grid-cols-1 grid-rows-2 bg-gray-300 border m-5 p-2 space-y-2 space-x-2">
         <input
           type="text"
-          placeholder="Ticket ID or Email Address or Subject"
+          placeholder="Ticket ID or Customer Email Address"
           className="w-full h-12 col-span-3 grid-row-1 p-2"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={onSearch}
-        >
-          Search
-        </button>
-        <button
-          className="bg-black hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
-          onClick={onReset}
-        >
-          Reset
-        </button>
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleExport}
-        >
-          Export
-        </button>
+        <div className="flex justify-between">
+          <button
+            className="w-full mr-1 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+            onClick={onSearch}
+          >
+            Search
+          </button>
+          <button
+            className="w-full mx-1 bg-black hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
+            onClick={onReset}
+          >
+            Reset
+          </button>
+          <button
+            className="w-full ml-1 bg-green-500 hover:bg-green-500-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleExport}
+          >
+            Export
+          </button>
+        </div>
+
         <div className="bg-white col-span-3" id="export-table">
           {searchedTicket.length > 0 && (
             <div className="grid grid-rows-1 grid-cols-4">
               <div className="col-span-4">
                 <h1 className="text-2xl font-bold p-5">Search Results: </h1>
               </div>
-              <div className="m-5 col-span-4 grid grid-cols-4">
-                <table className="border col-span-4">
-                  <thead>
-                    <tr>
-                      <th className="border">Ticket Component</th>
-                      <th className="border">Ticket Data</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+              {searchedTicket.map((ticket) => (
+                <div
+                  className="m-5 col-span-4 grid grid-cols-4"
+                  key={ticket._id}
+                >
+                  <table className="border col-span-4">
+                    <thead>
+                      <tr>
+                        <th className="border">Ticket Component</th>
+                        <th className="border">Ticket Data</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
                         <td className="border">Ticket ID</td>
                         <td className="border">{ticket._id}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Customer Email</td>
                         <td className="border">
                           {ticket.customerId
@@ -471,9 +484,7 @@ export default function TicketSection() {
                             : "No Data"}
                         </td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Customer ID</td>
                         <td className="border">
                           {ticket.customerId
@@ -481,9 +492,7 @@ export default function TicketSection() {
                             : "No Data"}
                         </td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">
                           {ticket.driverId
                             ? "Driver ID"
@@ -499,96 +508,65 @@ export default function TicketSection() {
                             : ticket.cleanerId}
                         </td>
                       </tr>
-                    ))}
-
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Cleaner current Location</td>
                         <td className="border">{ticket.currentLocation}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Status</td>
                         <td className="border">{ticket.status}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Description</td>
                         <td className="border">{ticket.description}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Distance</td>
                         <td className="border">{ticket.distance}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Date of Drop</td>
                         <td className="border">{ticket.dropDate}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Place of Drop</td>
                         <td className="border">{ticket.dropPlace}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Time of Drop</td>
                         <td className="border">{ticket.dropTime}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Mode of Service</td>
                         <td className="border">{ticket.modeOfService}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Other Type of Service</td>
                         <td className="border">
                           {ticket.otherServiceTypeText}
                         </td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Payment Mode</td>
                         <td className="border">{ticket.paymentMode}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Status of Payment</td>
                         <td className="border">{ticket.paymentStatus}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Pick-up Date</td>
                         <td className="border">{ticket.pickupDate}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Pick-up Place</td>
                         <td className="border">{ticket.pickupPlace}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Pick-up Time</td>
                         <td className="border">{ticket.pickupTime}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Pictures of the Car</td>
                         <td className="border" colSpan="5">
                           {ticket.picturesOfCar ? (
@@ -618,41 +596,30 @@ export default function TicketSection() {
                           )}
                         </td>
                       </tr>
-                    ))}
-
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Query</td>
                         <td className="border">{ticket.query}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Schedule of Service</td>
                         <td className="border">{ticket.scheduleOfService}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Total Price</td>
                         <td className="border">{ticket.totalPrice}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Tracking Location</td>
                         <td className="border">{ticket.trackingLocation}</td>
                       </tr>
-                    ))}
-                    {searchedTicket.map((ticket) => (
-                      <tr key={ticket._id}>
+                      <tr>
                         <td className="border">Type of Service</td>
                         <td className="border">{ticket.typesOfServices}</td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -663,17 +630,17 @@ export default function TicketSection() {
         </div>
         <div className="m-2">
           <div className="flex justify-center items-center">
-            <select className="bg-white border border-gray-400 rounded py-2">
-              <option value="none" defaultChecked>
+            <select className="bg-white border border-teal-500 rounded py-2">
+              <option value="none" defaultChecked className="">
                 Select
               </option>
-              <option value="all">All Tickets</option>
-              <option value="cleaner">Cleaner Tickets</option>
-              <option value="driver">Driver Tickets</option>
-              <option value="mechanic">Mechanic Tickets</option>
+              <option value="all" className="hover:bg-teal-500">All Tickets</option>
+              <option value="cleaner" className="hover:bg-teal-500">Cleaner Tickets</option>
+              <option value="driver" className="hover:bg-teal-500">Driver Tickets</option>
+              <option value="mechanic" className="hover:bg-teal-500">Mechanic Tickets</option>
             </select>
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-2"
+              className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded m-2"
               onClick={handleFilter}
             >
               Filter
