@@ -16,7 +16,7 @@ export default function AddNewUser() {
       phoneNo: "",
     },
     page3: {
-      aadharCard: "",
+      aadhaarCard: "",
       drivingLicense: "",
       panCard: "",
       // gstNumber: "", // This might change later based on what sir decides
@@ -116,7 +116,7 @@ export default function AddNewUser() {
   };
 
   const validatePage3 = () => {
-    const { aadharCard, drivingLicense, panCard } = formData.page3;
+    const { aadhaarCard, drivingLicense, panCard } = formData.page3;
     return aadharCard && drivingLicense && panCard;
   };
 
