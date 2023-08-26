@@ -1,4 +1,4 @@
-import { BellOutlined, CaretDownOutlined, UserSwitchOutlined, DatabaseOutlined, FileAddOutlined, FileOutlined, GlobalOutlined, HomeOutlined, ProfileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { BellOutlined, CaretDownOutlined, UserSwitchOutlined, DatabaseOutlined, FileAddOutlined, FileOutlined, GlobalOutlined, HomeOutlined, ProfileOutlined, TeamOutlined, UserOutlined, MessageOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -21,6 +21,12 @@ const items = [
     getItem('Mechanic', 'mechanic-kyc'), 
     getItem('Cleaner', 'cleaner-kyc'), 
     getItem('Driver', 'driver-kyc'), 
+  ]), 
+  getItem('Message', 'message', <MessageOutlined />, [
+    getItem('User', 'mechanic-message'),  
+    getItem('Vendor', 'vendor-message'),  
+    getItem('Admin', 'admin-message'),  
+    getItem('Feedback', 'feedback-message'),  
   ]), 
 ];
 
