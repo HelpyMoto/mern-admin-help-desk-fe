@@ -1,4 +1,5 @@
 import { Button, Radio } from "antd";
+import {Link} from 'react-router-dom'
 
 export default function () {
     return (
@@ -10,7 +11,9 @@ export default function () {
                     buttonStyle="solid"
                     defaultValue="Active"
                 />
-                <Button type="primary">Create New</Button>
+                <Link to='/admin/createAdmin'>
+                    <Button type="primary">Create New</Button>
+                </Link>
             </div>
         </>
     )
