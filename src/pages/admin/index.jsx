@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import { Avatar, Button, Input, Radio } from "antd";
 import { Space, Table, Tag } from 'antd';
 const { Column, ColumnGroup } = Table;
@@ -92,9 +93,10 @@ export default function () {
                     buttonStyle="solid"
                     defaultValue="Active"
                 />
-                <Button type="primary">Create New</Button>
-            </div><br />
-
+                <Link to='/admin/createAdmin'>
+                    <Button type="primary">Create New</Button>
+                </Link>
+            </div>
             <Table dataSource={data}>  
                     <Column title="Full Name" dataIndex="name" key="name" /> 
                 <Column title="UserId" dataIndex="userid" key="userid" />
@@ -124,7 +126,6 @@ export default function () {
                     )}
                 />
             </Table>
-
         </>
     )
 }
