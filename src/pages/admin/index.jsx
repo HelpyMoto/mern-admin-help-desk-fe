@@ -93,12 +93,12 @@ export default function () {
                     buttonStyle="solid"
                     defaultValue="Active"
                 />
-                <Link to='/admin/createAdmin'>
+                <Link to='/admin/new-admin'>
                     <Button type="primary">Create New</Button>
                 </Link>
             </div>
             <Table dataSource={data}>  
-                    <Column title="Full Name" dataIndex="name" key="name" /> 
+                <Column title="Full Name" dataIndex="name" key="name" /> 
                 <Column title="UserId" dataIndex="userid" key="userid" />
                 <Column title="Address" dataIndex="address" key="address" />
                 <Column

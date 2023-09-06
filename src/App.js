@@ -21,8 +21,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="ticket" element={<Ticket />} />
-            <Route path="ticket/createTicket" element={<CreateTicket />} />
-            <Route path="admin/createAdmin" element={<CreateAdmin />} />
+            <Route path="ticket/new-ticket" element={<CreateTicket />} />
+            <Route path="admin/new-admin" element={<CreateAdmin />} />
             <Route path="user" element={<User />} />
             <Route path="admin" element={<Admin />} />
             <Route path="vendor" element={<Vendor />} />
