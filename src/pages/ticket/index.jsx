@@ -126,9 +126,10 @@ export default function () {
           buttonStyle="solid"
           defaultValue="Mechanic"
         />
-        <Link to="/ticket/createTicket">
+        <Link to="/ticket/new-ticket">
           <Button type="primary">Create New</Button>
         </Link>
+        <Input style={{ maxWidth: "300px" }} placeholder="Search by Name, Email or Phone" />
         <Table columns={columns} dataSource={data} scroll={{ y: 200 }} />;
         <Modal
           title="Edit Details"

@@ -44,18 +44,6 @@ const CreateAdmin = () => {
           <Input placeholder="eg. abcd" />
         </Form.Item>
         <Form.Item
-          label="Id"
-          name="mechanicId"
-          rules={[
-            {
-              required: true,
-              message: "Please enter Admin Id!",
-            },
-          ]}
-        >
-          <Input placeholder="eg. abcd123" />
-        </Form.Item>
-        <Form.Item
           label="Email "
           name="email"
           rules={[
@@ -66,6 +54,18 @@ const CreateAdmin = () => {
           ]}
         >
           <Input placeholder="eg. abcd123@gmail.com" />
+        </Form.Item>
+        <Form.Item
+          label="Address "
+          name="adress"
+          rules={[
+            {
+              required: true,
+              message: "Please enter Your Address",
+            },
+          ]}
+        >
+          <Input placeholder="584- 45 This ThisGanj" />
         </Form.Item>
         <Form.Item
           label="Number"
